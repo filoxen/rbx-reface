@@ -43,6 +43,7 @@ local meshByName: {[string]: number} = {
 
 local function headMeshFromHumanoidDescription(humDesc: HumanoidDescription): number
 	for _, bodyPartDescription: BodyPartDescription in humDesc:GetChildren() do
+		if not bodyPartDescription:IsA("BodyPartDescription") then continue end
 		local HeadShape = bodyPartDescription.HeadShape
 		if HeadShape ~= "" then
 			return meshByName[HeadShape]
