@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rokit
+        uses: CompeyDev/setup-rokit@v0.1.0
+
+      - name: Install tools
+        run: rokit install --no-trust-check
+
+      - name: Build rbxm
+        run: rojo build default.project.json --output rbx-reface.rbxm
+
+      - name: Upload rbxm to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: rbx-reface.rbxm
+
+      - name: Publish to Wally
+        run: |
+          mkdir -p ~/.wally
+          echo "[tokens]" > ~/.wally/auth.toml
+          echo "\"https://api.wally.run/\" = \"${{ secrets.WALLY_AUTH_TOKEN }}\"" >> ~/.wally/auth.toml
+          wally publish
