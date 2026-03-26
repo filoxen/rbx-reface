@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["requests>=2.33.0"]
+# ///
+
+import time
+
 import requests
 
 faces = []
@@ -10,7 +17,21 @@ with open("faces.csv", mode="r") as faces_file:
 bundle_face_dict = {}
 
 for face in faces:
-    response = requests.get(url=f"https://roblox.com/catalog/{face}")
+    delay = 1.0
+    for attempt in range(5):
+        try:
+            response = requests.get(url=f"https://roblox.com/catalog/{face}")
+            break
+        except requests.exceptions.ConnectionError:
+            if attempt == 4:
+                raise
+            print(f"Connection error for face {face}, retrying in {delay}s...")
+            time.sleep(delay)
+            delay *= 2
+    else:
+        bundle_face_dict[face] = None
+        continue
+
     # some faces don't have bundles
     redirected_to_bundle = any(
         r.status_code == 302 and "/bundles/" in r.headers.get("Location", "")
@@ -21,6 +42,7 @@ for face in faces:
     else:
         bundle_id = None
     bundle_face_dict[face] = bundle_id
+    time.sleep(1.0)
 
 lines = ["local faceByBundle: {[number]: number} = {"]
 for face, bundle_id in bundle_face_dict.items():
