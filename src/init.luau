@@ -3,7 +3,7 @@ local reface = {}
 local convert = require("@self/convert")
 
 local function onPlayerAdded(player: Player)
-    player.CharacterAdded:Connect(function(character: Model)
+    player.CharacterAppearanceLoaded:Connect(function(character: Model)
         convert.convertCharacter(character.Humanoid)
     end)
     if player.Character then
