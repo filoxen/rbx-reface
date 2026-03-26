@@ -8,7 +8,7 @@ Characters wearing a dynamic head that was migrated from a classic face will hav
 Install via [Wally](https://wally.run):
 
 ```toml
-[dependencies]
+[server-dependencies]
 reface = "secret-rare/rbx-reface@0.1.0"
 ```
 
