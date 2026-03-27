@@ -1,9 +1,10 @@
 local Players = game:GetService("Players")
 local reface = {}
 local convert = require("@self/convert")
+local typing = require("@self/typing")
 
 local function onPlayerAdded(player: Player)
-    player.CharacterAppearanceLoaded:Connect(function(character: Model)
+    player.CharacterAppearanceLoaded:Connect(function(character: typing.CharacterModel)
         convert.convertCharacter(character.Humanoid)
     end)
     if player.Character then
