@@ -8,7 +8,7 @@ local function onPlayerAdded(player: Player)
         convert.convertCharacter(character.Humanoid)
     end)
     if player.Character then
-        convert.convertCharacter(player.Character.Humanoid)
+        convert.convertCharacter((player.Character :: typing.CharacterModel).Humanoid)
     end
 end
 
