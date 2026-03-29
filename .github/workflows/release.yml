@@ -32,4 +32,4 @@ jobs:
           mkdir -p ~/.wally
           echo "[tokens]" > ~/.wally/auth.toml
           echo "\"https://api.wally.run/\" = \"${{ secrets.WALLY_AUTH_TOKEN }}\"" >> ~/.wally/auth.toml
-          wally publish
+          wally publish --project-path src
