@@ -9,7 +9,7 @@ Install via [Wally](https://wally.run):
 
 ```toml
 [server-dependencies]
-reface = "secret-rare/rbx-reface@0.1.6"
+reface = "secret-rare/rbx-reface@0.1.7"
 ```
 
 Alternatively, download the `.rbxm` file from the [Releases](https://github.com/filoxen/rbx-reface/releases) tab and insert it into your place.
