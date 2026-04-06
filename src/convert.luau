@@ -50,11 +50,22 @@ function convert.convertCharacter(humanoid: Humanoid): ()
 
 	humDesc.Head = targetMesh
 	humDesc.Face = face
-	humanoid:ApplyDescriptionResetAsync(humDesc)
+
+	local ok, err = pcall(function()
+		humanoid:ApplyDescriptionResetAsync(humDesc)
+	end)
+
+	if not ok then
+		warn(`rbx-reface: failed to apply description: {err}`)
+		return
+	end
+
 	-- VERY UGLY HACK: iBot head texture workaround
 	if targetMesh == meshByName["iBot"] then
-	    local head: MeshPart = humanoid.Parent:FindFirstChild("Head")
-		head.TextureID = "rbxassetid://97292285"
+		local head = humanoid.Parent:FindFirstChild("Head")
+		if head then
+			(head :: MeshPart).TextureID = "rbxassetid://97292285"
+		end
 	end
 
 end
