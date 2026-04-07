@@ -28,7 +28,7 @@ local function headMeshFromHumanoidDescription(humDesc: HumanoidDescription): nu
 		if HeadShape ~= "" then
 			return meshByName[HeadShape]
 		end
-		warn(`Head with ID {bodyPartDescription.AssetId} has no mesh equivalent - defaulting to classic head`)
+		warn(`rbx-reface: head with ID {bodyPartDescription.AssetId} has no mesh equivalent - defaulting to classic head`)
 	end
 	return meshByName["RobloxClassic"]
 end
