@@ -28,7 +28,7 @@ A few conventions to follow:
 - **Types**: all function parameters and return values should be typed. Shared types live in `typing.luau`.
 - **String interpolation**: use backtick interpolation (`` `like {this}` ``) rather than `..` concatenation.
 - **Errors**: use `warn()` with a `rbx-reface: ` prefix for non-fatal issues, rather than `error()` or `print()`.
-- 
+
 ## Working on the face databases
 
 The face databases (`faceByBundle.luau` and `faceByMesh.luau`) are generated - don't edit them by hand.
