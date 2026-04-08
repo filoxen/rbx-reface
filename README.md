@@ -1,4 +1,10 @@
 # rbx-reface
+
+<p align="center">
+  <img src="https://github.com/filoxen/rbx-reface/blob/main/.github/assets/refaceiconv2.png" width=200 />
+</p>
+
+
 Restore classic decal faces following the Dynamic Head Migration.
 
 Characters wearing a dynamic head that was migrated from a classic face will have their head replaced with the appropriate classic mesh and face. Dynamic heads that were never associated with a classic face are left untouched.
