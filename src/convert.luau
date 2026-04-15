@@ -32,7 +32,7 @@ local function headMeshFromHumanoidDescription(humDesc: HumanoidDescription): nu
 	return meshByName["RobloxClassic"]
 end
 
-function convert.applyHeadDescription(humDesc: HumanoidDescription): ()
+function convert.applyHeadDescription(humDesc: HumanoidDescription): number
 	local currentMesh = humDesc.Head
 	local targetMesh = headMeshFromHumanoidDescription(humDesc)
 	local face = faceByMesh[currentMesh]
