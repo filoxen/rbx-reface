@@ -44,10 +44,10 @@ function convert.applyHeadDescription(humDesc: HumanoidDescription): ()
 
 	humDesc.Head = targetMesh
 	humDesc.Face = face
-	return targetMesh, face
+	return targetMesh
 end
 
-function convert.fixHeadTexture(humanoid: Humanoid, targetMesh: number): ()
+function convert.fixiBotTexture(humanoid: Humanoid, targetMesh: number): ()
 	-- iBot's texture is not correctly restored
 	if targetMesh == meshByName["iBot"] then
 		local head = humanoid.Parent:FindFirstChild("Head")
