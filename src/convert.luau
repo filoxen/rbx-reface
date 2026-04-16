@@ -32,13 +32,7 @@ local function headMeshFromHumanoidDescription(humDesc: HumanoidDescription): nu
 	return meshByName["RobloxClassic"]
 end
 
-function convert.convertCharacter(humanoid: Humanoid): ()
-	local humDesc = humanoid:GetAppliedDescription()
-	if humDesc == nil then
-		warn(`rbx-reface: could not get applied description for {humanoid.Parent.Name}`)
-		return
-	end
-
+function convert.applyHeadDescription(humDesc: HumanoidDescription): number
 	local currentMesh = humDesc.Head
 	local targetMesh = headMeshFromHumanoidDescription(humDesc)
 	local face = faceByMesh[currentMesh]
@@ -50,6 +44,29 @@ function convert.convertCharacter(humanoid: Humanoid): ()
 
 	humDesc.Head = targetMesh
 	humDesc.Face = face
+	return targetMesh
+end
+
+function convert.fixiBotTexture(humanoid: Humanoid, targetMesh: number): ()
+	-- iBot's texture is not correctly restored
+	if targetMesh == meshByName["iBot"] then
+		local head = humanoid.Parent:FindFirstChild("Head")
+		if head then
+			(head :: MeshPart).TextureID = "rbxassetid://97292285"
+		else
+			warn(`rbx-reface: could not find Head part to apply iBot texture workaround`)
+		end
+	end
+end
+
+function convert.convertCharacter(humanoid: Humanoid): ()
+	local humDesc = humanoid:GetAppliedDescription()
+	if humDesc == nil then
+		warn(`rbx-reface: could not get applied description for {humanoid.Parent.Name}`)
+		return
+	end
+
+	local targetMesh = convert.applyHeadDescription(humDesc)
 
 	local ok, err = pcall(function()
 		humanoid:ApplyDescriptionResetAsync(humDesc)
@@ -60,15 +77,7 @@ function convert.convertCharacter(humanoid: Humanoid): ()
 		return
 	end
 
-	-- iBot's texture is not correctly restored
-	if targetMesh == meshByName["iBot"] then
-		local head = humanoid.Parent:FindFirstChild("Head")
-		if head then
-			(head :: MeshPart).TextureID = "rbxassetid://97292285"
-		else
-			warn(`rbx-reface: could not find Head part to apply iBot texture workaround`)
-		end
-	end
+	convert.fixHeadTexture(humanoid, targetMesh)
 end
 
 return convert
