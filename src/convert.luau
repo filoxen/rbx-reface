@@ -77,7 +77,7 @@ function convert.convertCharacter(humanoid: Humanoid): ()
 		return
 	end
 
-	convert.fixHeadTexture(humanoid, targetMesh)
+	convert.fixiBotTexture(humanoid, targetMesh)
 end
 
 return convert
